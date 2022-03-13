@@ -1,32 +1,22 @@
 
 
 def validators(dict):
+    validations = {
+    "name": lambda x: isinstance(x, str) and 5 <= len(x) <= 45,
+    "lat": lambda x: isinstance(x, float) and -90 <= x <= 90,
+    "lng": lambda x: isinstance(x, float) and -180 <= x <= 180,
+    }
+    for k,v in dict.items():
+        # return validations.get(keys, lambda x: False)(values)
+        return all(validations.get(k, lambda x: False)(v) for (k, v) in dict.items())
     
-    #define num to compare it to the len of dict
-    num = 0 
-    for value in dict.values():
-        if type(value) == str:
-            if len(value)>5 and len(value)<45:
-                num +=1
-        elif type(value)== float and (value>-180 and value<180):
-            num+=1
-        elif type(value) == bool:
-            num+=1  
-   #if the num value is equal to the length of dict-items, for all the dict-values validation then it returns, True
-    if num == len(dicts):
-        return True
-    else:
-        return False
 
 def check(dict, func):
     return func(dict)
 
-dicts = {'name':'Santosh',
-        'lat':10.00,
-        'lng':22.00,
-        'bool':True,
-        'apple':'a'
+dicts = {'name':'Seewew',
+        'lat':43.222,
+        'lng':-22.3331
         }
-# print(len(dicts))
 
 print(check(dicts, validators))
